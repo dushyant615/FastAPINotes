@@ -41,7 +41,7 @@
 ## 🛠 Setup & Demo
 - Install:  
   ```bash
-  pip install fastapi uvicorn
+  pip install fastapi uvicorn pydantic
 - Code 
   ```
   from fastapi import FastAPI
@@ -49,4 +49,14 @@
   @app.get("/")
   def read_root():
       return {"Hello": "World"}
-
+- Creating a virtual environment and activate it
+  ```bash
+  python -m venv myenv
+  myenv\Scripts\activate
+- Start an app
+  ```bash
+  uvicorn main:app --reload
+- Swagger and Redocly routes
+  ```
+  /docs
+  /redoc

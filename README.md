@@ -60,3 +60,56 @@
   ```
   /docs
   /redoc
+
+# 📘 Study Notes: Pydantic Crash Course
+
+## 🔑 Core Concepts
+- **Python’s dynamic typing** → Flexible but risky in production.
+- **Problem 1: Type Validation**
+  - Type hints don’t enforce correctness.
+  - Manual checks are repetitive and unscalable.
+  - Pydantic enforces strict type validation automatically.
+- **Problem 2: Data Validation**
+  - Values must meet logical constraints (e.g., age ≥ 0, valid email).
+  - Without validation, incorrect data can slip into databases.
+  - Pydantic handles these rules elegantly.
+
+## ⚙️ How Pydantic Works
+1. **Define a Model**
+   - Create a class inheriting from `BaseModel`.
+   - Specify fields and their types.
+   - Add constraints (e.g., `age > 0`).
+2. **Instantiate with Raw Data**
+   - Pass dictionaries into the model.
+   - Pydantic validates automatically.
+   - Raises errors if data is invalid.
+3. **Use Validated Objects**
+   - Functions receive validated Pydantic objects.
+   - Cleaner, reusable, and scalable code.
+
+## 🛠️ Features Highlighted
+- **Automatic type conversion** → `"30"` (string) → `30` (int).
+- **Error handling** → Clear errors for missing/invalid fields.
+- **Complex fields** → Lists, dictionaries, nested models supported.
+
+## 📌 Example
+```python
+from pydantic import BaseModel
+from typing import List, Dict
+
+class Patient(BaseModel):
+    name: str
+    age: int
+    weight: float
+    married: bool
+    allergies: List[str]
+    contact: Dict[str, str]
+
+patient = Patient(
+    name="Nitesh",
+    age=30,
+    weight=75.2,
+    married=True,
+    allergies=["pollen", "dust"],
+    contact={"email": "abc@gmail.com", "phone": "1234567890"}
+)
